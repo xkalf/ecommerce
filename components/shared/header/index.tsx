@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { APP_NAME } from '@/lib/constants'
-import Menu from './menu'
+import Image from "next/image";
+import Link from "next/link";
+import { APP_NAME } from "@/lib/constants";
+import Menu from "./menu";
 
 import {
   Drawer,
@@ -10,14 +10,14 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/components/ui/drawer'
-import { Button } from '@/components/ui/button'
-import { MenuIcon } from 'lucide-react'
-import { getAllCategories } from '@/lib/actions/product.actions'
-import Search from './search'
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import { MenuIcon } from "lucide-react";
+import { getAllCategories } from "@/lib/actions/product.actions";
+import Search from "./search";
 
 const Header = async () => {
-  const categories = await getAllCategories()
+  const categories = await getAllCategories();
 
   return (
     <header className="w-full border-b">
@@ -70,7 +70,7 @@ const Header = async () => {
         <Search />
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
