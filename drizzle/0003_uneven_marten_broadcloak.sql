@@ -1,0 +1,1 @@
+ALTER TABLE "commons" ADD COLUMN "type" "common_type" NOT NULL;

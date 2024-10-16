@@ -1,6 +1,6 @@
-import DeleteDialog from '@/components/shared/delete-dialog'
-import Pagination from '@/components/shared/pagination'
-import { Button } from '@/components/ui/button'
+import DeleteDialog from "@/components/shared/delete-dialog";
+import Pagination from "@/components/shared/pagination";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -8,34 +8,34 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { deleteProduct, getAllProducts } from '@/lib/actions/product.actions'
-import { APP_NAME } from '@/lib/constants'
-import { formatCurrency, formatId } from '@/lib/utils'
-import { Metadata } from 'next'
-import Link from 'next/link'
+} from "@/components/ui/table";
+import { deleteProduct, getAllProducts } from "@/lib/actions/product.actions";
+import { APP_NAME } from "@/lib/constants";
+import { formatCurrency, formatId } from "@/lib/utils";
+import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: `Admin Products - ${APP_NAME}`,
-}
+};
 
 export default async function AdminProductsPage({
   searchParams,
 }: {
   searchParams: {
-    page: string
-    query: string
-    category: string
-  }
+    page: string;
+    query: string;
+    category: string;
+  };
 }) {
-  const page = Number(searchParams.page) || 1
-  const searchText = searchParams.query || ''
-  const category = searchParams.category || ''
+  const page = Number(searchParams.page) || 1;
+  const searchText = searchParams.query || "";
+  const category = searchParams.category || "";
   const products = await getAllProducts({
     query: searchText,
     category,
     page,
-  })
+  });
   return (
     <div className="space-y-2">
       <div className="flex-between">
@@ -83,5 +83,5 @@ export default async function AdminProductsPage({
         )}
       </div>
     </div>
-  )
+  );
 }

@@ -51,11 +51,11 @@ const Header = async () => {
               </DrawerHeader>
             </DrawerContent>
           </Drawer>
-          <Link href="/" className="flex-start">
+          <Link href="/" className="flex-start text-xl">
             <Image
               src="/assets/icons/icon.svg"
-              width={100}
-              height={100}
+              width={150}
+              height={150}
               alt={`${APP_NAME} logo`}
             />
             {APP_NAME}

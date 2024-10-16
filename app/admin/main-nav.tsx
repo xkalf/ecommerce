@@ -22,6 +22,10 @@ const links = [
     title: "Users",
     href: "/admin/users",
   },
+  {
+    title: "Commons",
+    href: "/admin/commons",
+  },
 ];
 export default function MainNav({
   className,

@@ -1,4 +1,6 @@
 {
+  "id": "02bc72ee-25b3-4022-b852-4f8ba977c605",
+  "prevId": "72f61f4a-f80a-41e8-b6ff-c0da82e62443",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -78,15 +80,15 @@
         "account_userId_user_id_fk": {
           "name": "account_userId_user_id_fk",
           "tableFrom": "account",
+          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
-          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
@@ -98,7 +100,8 @@
           ]
         }
       },
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "public.cart": {
       "name": "cart",
@@ -167,19 +170,77 @@
         "cart_userId_user_id_fk": {
           "name": "cart_userId_user_id_fk",
           "tableFrom": "cart",
+          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
-          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.commons": {
+      "name": "commons",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "images": {
+          "name": "images",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "name": "type",
+          "type": "common_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "parentId": {
+          "name": "parentId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "commons_parentId_commons_id_fk": {
+          "name": "commons_parentId_commons_id_fk",
+          "tableFrom": "commons",
+          "tableTo": "commons",
+          "columnsFrom": [
+            "parentId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "public.orderItems": {
       "name": "orderItems",
@@ -233,28 +294,28 @@
         "orderItems_orderId_order_id_fk": {
           "name": "orderItems_orderId_order_id_fk",
           "tableFrom": "orderItems",
+          "tableTo": "order",
           "columnsFrom": [
             "orderId"
           ],
-          "tableTo": "order",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         },
         "orderItems_productId_product_id_fk": {
           "name": "orderItems_productId_product_id_fk",
           "tableFrom": "orderItems",
+          "tableTo": "product",
           "columnsFrom": [
             "productId"
           ],
-          "tableTo": "product",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
@@ -266,7 +327,8 @@
           ]
         }
       },
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "public.order": {
       "name": "order",
@@ -366,19 +428,20 @@
         "order_userId_user_id_fk": {
           "name": "order_userId_user_id_fk",
           "tableFrom": "order",
+          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
-          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "public.product": {
       "name": "product",
@@ -477,6 +540,7 @@
       },
       "indexes": {
         "product_slug_idx": {
+          "name": "product_slug_idx",
           "columns": [
             {
               "expression": "slug",
@@ -485,16 +549,16 @@
               "nulls": "last"
             }
           ],
-          "with": {},
-          "name": "product_slug_idx",
           "isUnique": true,
+          "concurrently": false,
           "method": "btree",
-          "concurrently": false
+          "with": {}
         }
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "public.reviews": {
       "name": "reviews",
@@ -557,32 +621,33 @@
         "reviews_userId_user_id_fk": {
           "name": "reviews_userId_user_id_fk",
           "tableFrom": "reviews",
+          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
-          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         },
         "reviews_productId_product_id_fk": {
           "name": "reviews_productId_product_id_fk",
           "tableFrom": "reviews",
+          "tableTo": "product",
           "columnsFrom": [
             "productId"
           ],
-          "tableTo": "product",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "public.session": {
       "name": "session",
@@ -612,19 +677,20 @@
         "session_userId_user_id_fk": {
           "name": "session_userId_user_id_fk",
           "tableFrom": "session",
+          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
-          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "public.user": {
       "name": "user",
@@ -697,6 +763,7 @@
       },
       "indexes": {
         "user_email_idx": {
+          "name": "user_email_idx",
           "columns": [
             {
               "expression": "email",
@@ -705,16 +772,16 @@
               "nulls": "last"
             }
           ],
-          "with": {},
-          "name": "user_email_idx",
           "isUnique": true,
+          "concurrently": false,
           "method": "btree",
-          "concurrently": false
+          "with": {}
         }
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     },
     "public.verificationToken": {
       "name": "verificationToken",
@@ -750,17 +817,27 @@
           ]
         }
       },
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     }
   },
-  "enums": {},
-  "schemas": {},
-  "_meta": {
-    "schemas": {},
-    "tables": {},
-    "columns": {}
+  "enums": {
+    "public.common_type": {
+      "name": "common_type",
+      "schema": "public",
+      "values": [
+        "category",
+        "brand",
+        "banner"
+      ]
+    }
   },
-  "id": "c92ec6cf-bdb2-41de-b092-0c2c4ac2caa1",
-  "prevId": "00000000-0000-0000-0000-000000000000",
-  "sequences": {}
+  "schemas": {},
+  "sequences": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
 }
