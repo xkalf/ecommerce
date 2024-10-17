@@ -1,17 +1,17 @@
 import { cn } from "@/lib/utils";
 
 const ProductPrice = ({
-  value,
-  className,
+	value,
+	className,
 }: {
-  value: number;
-  className?: string;
+	value: number;
+	className?: string;
 }) => {
-  return (
-    <p className={cn("text-xl", className)}>
-      {Intl.NumberFormat("mn").format(value)}₮
-    </p>
-  );
+	return (
+		<p className={cn("text-sm", className)}>
+			{Intl.NumberFormat("mn").format(value)}₮
+		</p>
+	);
 };
 
 export default ProductPrice;
